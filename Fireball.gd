@@ -1,6 +1,8 @@
 extends Area2D
 
-const SPEED = 200
+signal fireball_gone
+
+const SPEED = 400
 var velocity = Vector2()
 var direction = 1
 
@@ -18,8 +20,11 @@ func _physics_process(delta):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	call_deferred('free')
+	emit_signal("fireball_gone")
 
 
 func _on_Fireball_body_entered(body):
-	queue_free()
+	if body.name != "Player":
+		call_deferred('free')
+		emit_signal("fireball_gone")
