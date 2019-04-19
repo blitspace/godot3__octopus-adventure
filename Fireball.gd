@@ -1,6 +1,6 @@
 extends Area2D
 
-signal fireball_gone
+signal gone
 
 const SPEED = 400
 var velocity = Vector2()
@@ -20,11 +20,12 @@ func _physics_process(delta):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	call_deferred('free')
-	emit_signal("fireball_gone")
+	emit_signal("gone")
+	call_deferred("free")
+
 
 
 func _on_Fireball_body_entered(body):
 	if body.name != "Player":
-		call_deferred('free')
-		emit_signal("fireball_gone")
+		call_deferred("free")
+		emit_signal("gone")

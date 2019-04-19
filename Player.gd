@@ -6,12 +6,14 @@ const SPEED = 200
 const JUMP_HEIGHT = -500
 const ACCELARATION = 50
 const MAX_SPEED = 200
+const MAX_FIREBALL = 3
 
 const FIREBALL = preload("res://Fireball.tscn")
 
 var is_attacking = false
 var motion = Vector2()
 var fireball_starting_position_x = null
+var fireballs_fired = 0
 
 func _ready():
 	fireball_starting_position_x = $Position2D.position.x
@@ -38,7 +40,9 @@ func _physics_process(delta):
 		$Sprite.play("idle")
 		friction = true
 
-	if Input.is_action_just_pressed("ui_focus_next") and not is_attacking:
+	if Input.is_action_just_pressed("ui_focus_next") and fireballs_fired < MAX_FIREBALL:
+			#not is_attacking
+
 		is_attacking = true
 		var dir = sign($Position2D.position.x)
 		if $Sprite.is_playing() and $Sprite.animation == "run":
@@ -47,12 +51,15 @@ func _physics_process(delta):
 			$Position2D.position.x = fireball_starting_position_x * dir
 
 		var fireball = FIREBALL.instance()
-		fireball.connect("fireball_gone", self, "test")
+		fireball.connect("gone", self, "_on_Fireball_gone")
 
 		fireball.set_fireball_direction(sign($Position2D.position.x))
 
 		get_parent().add_child(fireball)
 		fireball.position = $Position2D.global_position
+
+		fireballs_fired = fireballs_fired + 1
+		print(fireballs_fired)
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up"):
@@ -70,5 +77,6 @@ func _physics_process(delta):
 	motion = move_and_slide(motion, UP)
 
 
-func test():
+func _on_Fireball_gone():
 	is_attacking = false
+	fireballs_fired = fireballs_fired - 1
