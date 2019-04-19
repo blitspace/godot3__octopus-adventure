@@ -49,9 +49,8 @@ func _physics_process(delta):
 		friction = true
 
 	if Input.is_action_just_pressed("ui_focus_next") and fireballs_fired < MAX_FIREBALL:
-			#not is_attacking
-
 		is_attacking = true
+		$Sprite.play("fire")
 		var dir = sign($Position2D.position.x)
 		if $Sprite.is_playing() and $Sprite.animation == "run":
 			$Position2D.position.x = (fireball_starting_position_x * 2) * dir

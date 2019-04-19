@@ -3,9 +3,12 @@
 [node name="HUD" type="CanvasLayer"]
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 720.0
-margin_right = 1023.0
+margin_left = 721.0
+margin_right = 1024.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Score Label" type="Label" parent="Panel"]
 margin_left = 190.0
