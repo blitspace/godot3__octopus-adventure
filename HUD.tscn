@@ -1,0 +1,38 @@
+[gd_scene format=2]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 720.0
+margin_right = 1023.0
+margin_bottom = 40.0
+
+[node name="Score Label" type="Label" parent="Panel"]
+margin_left = 190.0
+margin_right = 251.0
+margin_bottom = 40.0
+text = "Score"
+valign = 1
+
+[node name="HP Label" type="Label" parent="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+text = "HP"
+valign = 1
+
+[node name="Score" type="Label" parent="Panel"]
+margin_left = 263.265
+margin_right = 303.265
+margin_bottom = 40.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="HP" type="Label" parent="Panel"]
+margin_left = 40.0
+margin_right = 80.0
+margin_bottom = 40.0
+text = "0"
+align = 1
+valign = 1
+

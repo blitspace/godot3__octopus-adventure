@@ -2,10 +2,10 @@ extends KinematicBody2D
 
 const UP = Vector2(0, -1)
 const GRAVITY = 20
-const SPEED = 200
+const SPEED = 400
 const JUMP_HEIGHT = -500
 const ACCELARATION = 50
-const MAX_SPEED = 200
+const MAX_SPEED = 400
 const MAX_FIREBALL = 3
 
 const FIREBALL = preload("res://Fireball.tscn")
@@ -15,9 +15,17 @@ var motion = Vector2()
 var fireball_starting_position_x = null
 var fireballs_fired = 0
 
+var player_hp = 100
+var score = 0
+
 func _ready():
 	fireball_starting_position_x = $Position2D.position.x
+	update_hp()
+	update_score()
 
+	for enemy in $"../Enemies".get_children():
+		enemy.connect("damage_player", self, "_on_damage_player")
+		enemy.connect("fireball_hit", self, "_on_Enemy_fireball_hit")
 
 func _physics_process(delta):
 	var friction = false
@@ -79,4 +87,27 @@ func _physics_process(delta):
 
 func _on_Fireball_gone():
 	is_attacking = false
-	fireballs_fired = fireballs_fired - 1
+	if fireballs_fired > 0:
+		fireballs_fired = fireballs_fired - 1
+
+
+func _on_damage_player():
+	print("ouch")
+	player_hp = int(player_hp) - 10
+	update_hp()
+
+
+func _on_Enemy_fireball_hit():
+	score = int(score) + 10
+	update_score()
+
+func update_hp():
+	$"../HUD/Panel/HP".text = str(player_hp)
+
+
+func update_score():
+	$"../HUD/Panel/Score".text = str(score)
+
+
+
+

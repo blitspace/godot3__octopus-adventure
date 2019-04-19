@@ -17,7 +17,16 @@ _global_script_class_icons={
 
 config/name="Octopus Adventure 2"
 run/main_scene="res://World.tscn"
-config/icon="res://icon.png"
+config/icon="res://sprites/octopus/idle.png"
+
+[display]
+
+window/size/resizable=false
+window/size/always_on_top=true
+
+[gui]
+
+theme/use_hidpi=true
 
 [rendering]
 

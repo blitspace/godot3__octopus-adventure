@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Fireball.gd" type="Script" id=1]
 [ext_resource path="res://sprites/octopus/fireball.png" type="Texture" id=2]
@@ -6,8 +6,65 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.0155
 
+[sub_resource type="Curve" id=2]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, -87.12 ), 0.0, 0.0, 0, 0, Vector2( 1, 121.968 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.718518, 0.985185 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.868761, 0.914063, 0.0856934, 1, 0.925781, 0.188049, 0.274502, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 92.4 ), 0.0, 0.0, 0, 0, Vector2( 1, -2.63998 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 0.907 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.6606 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 0.9136 ), 0.0, 0.0, 0, 0, Vector2( 0.983165, 0.7728 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+trail_size_modifier = SubResource( 11 )
+emission_shape = 2
+emission_box_extents = Vector3( 5, 20, 1 )
+spread = 80.0
+gravity = Vector3( 0, 98, 0 )
+angular_velocity = 12.7953
+angular_velocity_curve = SubResource( 3 )
+linear_accel = 25.0
+radial_accel = 30.0
+radial_accel_random = 1.0
+radial_accel_curve = SubResource( 7 )
+angle_random = 0.23
+scale = 10.0
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 5 )
+
+[sub_resource type="NoiseTexture" id=13]
+
 [node name="Fireball" type="Area2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -17,6 +74,21 @@ position = Vector2( 3, 0 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+show_behind_parent = true
+position = Vector2( -20, 0 )
+rotation = 1.5708
+amount = 40
+speed_scale = 2.0
+process_material = SubResource( 12 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = SubResource( 13 )
+offset = Vector2( 5, 5 )
+texture_scale = 5.0
+color = Color( 0.956863, 0.811765, 0.0352941, 1 )
+energy = 3.0
 
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
