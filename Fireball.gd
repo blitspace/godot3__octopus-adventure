@@ -10,6 +10,7 @@ func set_fireball_direction(dir):
 	direction = dir
 	if dir == -1:
 		$Sprite.flip_h = true
+
 	else:
 		$Sprite.flip_h = false
 

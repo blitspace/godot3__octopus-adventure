@@ -2,12 +2,13 @@ extends KinematicBody2D
 
 const UP = Vector2(0, -1)
 const GRAVITY = 20
-const SPEED = 400
+# const SPEED = 400
+const SPEED = 300
 const JUMP_HEIGHT = -500
 const ACCELARATION = 50
-const MAX_SPEED = 400
+# const MAX_SPEED = 400
+const MAX_SPEED = 300
 const MAX_FIREBALL = 3
-
 const FIREBALL = preload("res://Fireball.tscn")
 
 var is_attacking = false
