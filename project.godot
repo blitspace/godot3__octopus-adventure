@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Octopus Adventure 2"
-run/main_scene="res://Graveyard.tscn"
+run/main_scene="res://stages/spooky lands/Graveyard.tscn"
 config/icon="res://sprites/octopus/idle.png"
 
 [display]

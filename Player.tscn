@@ -20,11 +20,6 @@ animations = [ {
 "name": "jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "fall",
@@ -33,6 +28,11 @@ animations = [ {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "fire",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 } ]
 
@@ -68,4 +68,3 @@ position = Vector2( 32, 0 )
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
 position = Vector2( 765.448, 308.843 )
 texture = ExtResource( 7 )
-

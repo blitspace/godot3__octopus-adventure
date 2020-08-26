@@ -89,6 +89,5 @@ offset = Vector2( 5, 5 )
 texture_scale = 5.0
 color = Color( 0.956863, 0.811765, 0.0352941, 1 )
 energy = 3.0
-
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
