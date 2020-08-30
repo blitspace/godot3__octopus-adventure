@@ -19,26 +19,29 @@ var fireballs_fired = 0
 var player_hp = 100
 var score = 0
 
+export var paralax_background = "123"
+
 func _ready():
 	fireball_starting_position_x = $Position2D.position.x
 	update_hp()
 	update_score()
 
-	for enemy in $"../Enemies".get_children():
-		enemy.connect("damage_player", self, "_on_damage_player")
-		enemy.connect("fireball_hit", self, "_on_Enemy_fireball_hit")
+	if $"../Enemies":
+		for enemy in $"../Enemies".get_children():
+			enemy.connect("damage_player", self, "_on_damage_player")
+			enemy.connect("fireball_hit", self, "_on_Enemy_fireball_hit")
 
 func _physics_process(delta):
 	var friction = false
 	motion.y += GRAVITY
 
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right") or Input.is_action_pressed("move_right"):
 		motion.x = min(motion.x + ACCELARATION, MAX_SPEED)
 		$Sprite.flip_h = false
 		$Sprite.play("run")
 		if sign($Position2D.position.x) == -1:
 			$Position2D.position *= -1
-	elif Input.is_action_pressed("ui_left"):
+	elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("move_left"):
 		motion.x = max(motion.x - ACCELARATION, -MAX_SPEED)
 		$Sprite.flip_h = true
 		$Sprite.play("run")
@@ -49,7 +52,7 @@ func _physics_process(delta):
 		$Sprite.play("idle")
 		friction = true
 
-	if Input.is_action_just_pressed("ui_focus_next") and fireballs_fired < MAX_FIREBALL:
+	if Input.is_action_just_pressed("move_fire") and fireballs_fired < MAX_FIREBALL:
 		is_attacking = true
 		$Sprite.play("fire")
 		var dir = sign($Position2D.position.x)
@@ -70,7 +73,7 @@ func _physics_process(delta):
 		print(fireballs_fired)
 
 	if is_on_floor():
-		if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("move_jump"):
 			motion.y = JUMP_HEIGHT
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.2)
@@ -104,10 +107,10 @@ func _on_Enemy_fireball_hit():
 func update_hp():
 	$"../HUD/Panel/HP".text = str(player_hp)
 
-
 func update_score():
 	$"../HUD/Panel/Score".text = str(score)
 
-
-
+func _on_Area2D_body_entered(body):
+	if body.name == "Player":
+		get_tree().reload_current_scene()
 
