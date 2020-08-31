@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://stages/swamp lands/3 Objects/Ladders/5.png" type="Texture" id=1]
+
+[node name="LadderMidBroken" type="Node2D"]
+position = Vector2( 50, 16 )
+
+[node name="4" type="Sprite" parent="."]
+position = Vector2( 270, 434 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )

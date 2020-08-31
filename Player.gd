@@ -52,7 +52,7 @@ func _physics_process(delta):
 		$Sprite.play("idle")
 		friction = true
 
-	if Input.is_action_just_pressed("move_fire") and fireballs_fired < MAX_FIREBALL:
+	if Input.is_action_just_pressed("m") and fireballs_fired < MAX_FIREBALL:
 		is_attacking = true
 		$Sprite.play("fire")
 		var dir = sign($Position2D.position.x)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://stages/swamp lands/3 Objects/Boxes/4.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.5, 13 )
+
+[node name="Box" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 540, 300 )
+scale = Vector2( 2, 2 )
+
+[node name="4" type="Sprite" parent="StaticBody2D"]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 1 )
